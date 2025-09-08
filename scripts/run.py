@@ -194,8 +194,7 @@ if __name__ == "__main__":
 	old_training_step = 0
 	n_steps = args.n_steps
 	
-	# Save start time
-	train_start_time = time.time()
+	
 
 
 	# If we loaded a snapshot, didn't specify a number of steps, _and_ didn't open a GUI,
@@ -210,6 +209,7 @@ if __name__ == "__main__":
 
 	tqdm_last_update = 0
 	if n_steps > 0:
+		train_start_time = time.time()				# Save start time
 		with tqdm(desc="Training", total=n_steps, unit="steps") as t:
 			while testbed.frame():
 				if prev_train_mode != testbed.nerf.training.train_mode and use_training_schedule:
@@ -256,12 +256,12 @@ if __name__ == "__main__":
 					tqdm_last_update = now
 
 				prev_train_mode = ngp.TrainMode(testbed.nerf.training.train_mode)
-	
-	#END training, so we can take the time and print it
-	train_end_time = time.time()
-	elapsed_time = train_end_time - train_start_time
-	print(f"Tempo totale di addestramento: {elapsed_time:.2f} secondi ({elapsed_time/60:.2f} minuti)")
-	
+		
+		#END training, so we can take the time and print it
+		train_end_time = time.time()
+		elapsed_time = train_end_time - train_start_time
+		print(f"Tempo totale di addestramento: {elapsed_time:.2f} secondi ({elapsed_time/60:.2f} minuti)")
+
 	if args.save_snapshot:
 		os.makedirs(os.path.dirname(args.save_snapshot), exist_ok=True)
 		testbed.save_snapshot(args.save_snapshot, False)
