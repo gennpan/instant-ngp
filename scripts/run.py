@@ -11,18 +11,19 @@
 import argparse
 import os
 import commentjson as json
-
+import logging
 import numpy as np
-
 import shutil
 import time
 
 from common import *
 from scenes import *
-
 from tqdm import tqdm
 
 import pyngp as ngp # noqa
+
+logging.basicConfig(level=logging.INFO, format="%(levelname)s: %(message)s")
+
 
 def parse_args():
 	parser = argparse.ArgumentParser(description="Run instant neural graphics primitives with additional configuration & output options")
@@ -260,7 +261,7 @@ if __name__ == "__main__":
 		#END training, so we can take the time and print it
 		train_end_time = time.time()
 		elapsed_time = train_end_time - train_start_time
-		print(f"Tempo totale di addestramento: {elapsed_time:.2f} secondi ({elapsed_time/60:.2f} minuti)")
+		logging.info(f"Total training time: {elapsed_time:.2f} seconds ({elapsed_time/60:.2f} minutes)")
 
 	if args.save_snapshot:
 		os.makedirs(os.path.dirname(args.save_snapshot), exist_ok=True)
