@@ -187,9 +187,16 @@ if __name__ == "__main__":
 			print(f"Warning: forcing train mode to NeRF for nerf compatibility (was {testbed.nerf.training.train_mode})")
 		testbed.nerf.training.train_mode = ngp.TrainMode.Nerf
 
+	# Take training-time 
+	train_start_time = time.time()
+
 
 	old_training_step = 0
 	n_steps = args.n_steps
+	
+	# Save start time
+	train_start_time = time.time()
+
 
 	# If we loaded a snapshot, didn't specify a number of steps, _and_ didn't open a GUI,
 	# don't train by default and instead assume that the goal is to render screenshots,
@@ -249,7 +256,12 @@ if __name__ == "__main__":
 					tqdm_last_update = now
 
 				prev_train_mode = ngp.TrainMode(testbed.nerf.training.train_mode)
-
+	
+	#END training, so we can take the time and print it
+	train_end_time = time.time()
+	elapsed_time = train_end_time - train_start_time
+	print(f"Tempo totale di addestramento: {elapsed_time:.2f} secondi ({elapsed_time/60:.2f} minuti)")
+	
 	if args.save_snapshot:
 		os.makedirs(os.path.dirname(args.save_snapshot), exist_ok=True)
 		testbed.save_snapshot(args.save_snapshot, False)
