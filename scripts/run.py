@@ -210,8 +210,8 @@ if __name__ == "__main__":
 
 	tqdm_last_update = 0
 	if n_steps > 0:
-		train_start_time = time.time()				# Save start time
 		with tqdm(desc="Training", total=n_steps, unit="steps") as t:
+			train_start_time = time.monotonic()				# Save start time
 			while testbed.frame():
 				if prev_train_mode != testbed.nerf.training.train_mode and use_training_schedule:
 					print("Disabling Rfl/RflRelax training schedule due to UI train mode change")
@@ -259,9 +259,14 @@ if __name__ == "__main__":
 				prev_train_mode = ngp.TrainMode(testbed.nerf.training.train_mode)
 		
 		#END training, so we can take the time and print it
-		train_end_time = time.time()
+		train_end_time = time.monotonic()
 		elapsed_time = train_end_time - train_start_time
-		logging.info(f"Total training time: {elapsed_time:.2f} seconds ({elapsed_time/60:.2f} minutes)")
+		minutes = int(elapsed_time // 60)
+		seconds = int(elapsed_time % 60)
+		milliseconds = int((elapsed_time - int(elapsed_time)) * 1000)
+
+		logging.info(f"Total training time: {minutes} min {seconds} sec {milliseconds} ms")
+
 
 	if args.save_snapshot:
 		os.makedirs(os.path.dirname(args.save_snapshot), exist_ok=True)
