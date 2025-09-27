@@ -22,16 +22,16 @@
 	},
 	"encoding": {
 		"otype": "HashGrid",
-		"n_levels": 2,
-		"n_features_per_level": 2,
-		"log2_hashmap_size": 17,
+		"n_levels": 8,
+		"n_features_per_level": 4,
+		"log2_hashmap_size": 19,
 		"base_resolution": 16
 	},
 	"network": {
-		"otype": "CutlassMLP",				
+		"otype": "CutlassMLP",
 		"activation": "ReLU",
 		"output_activation": "None",
-		"n_neurons": 16,
+		"n_neurons": 64,
 		"n_hidden_layers": 1
 	},
 	"dir_encoding": {
@@ -51,8 +51,8 @@
 		"otype": "CutlassMLP",
 		"activation": "ReLU",
 		"output_activation": "None",
-		"n_neurons": 32,
-		"n_hidden_layers": 1
+		"n_neurons": 64,
+		"n_hidden_layers": 2
 	},
 	"distortion_map": {
 		"resolution": [32, 32],
