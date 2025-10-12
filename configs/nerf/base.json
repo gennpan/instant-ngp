@@ -28,7 +28,7 @@
 		"base_resolution": 32
 	},
 	"network": {
-		"otype": "CutlassMLP",
+		"otype": "FullyFusedMLP",
 		"activation": "ReLU",
 		"output_activation": "None",
 		"n_neurons": 64,
@@ -48,7 +48,7 @@
 		]
 	},
 	"rgb_network": {
-		"otype": "CutlassMLP",
+		"otype": "FullyFusedMLP",
 		"activation": "ReLU",
 		"output_activation": "None",
 		"n_neurons": 64,
@@ -100,4 +100,3 @@
 		}
 	}
 }
-
