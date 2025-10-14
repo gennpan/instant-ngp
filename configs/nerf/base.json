@@ -25,7 +25,7 @@
 		"n_levels": 12,
 		"n_features_per_level": 8,
 		"log2_hashmap_size": 18,
-		"base_resolution": 4
+		"base_resolution": 32
 	},
 	"network": {
 		"otype": "FullyFusedMLP",
